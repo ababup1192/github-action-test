@@ -27,15 +27,21 @@ jobs:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5
-
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: "patch"
       - name: Create release
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ steps.branch-name.outputs.current_branch }}"
+          tag_name: https://companyname.atlassian.net/browse/${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.branch-name.outputs.current_branch }}
+          release_name: ${{ steps.branch-name.outputs.current_branch }}
           draft: false
           prerelease: true
 
