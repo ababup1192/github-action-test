@@ -33,9 +33,8 @@ jobs:
         uses: actions/create-release@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ steps.extract_branch.outputs.branch }}
+          RELEASE_NAME: ${{ steps.extract_branch.outputs.branch }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: $BRANCH_NAME
           draft: false
           prerelease: true
