@@ -41,7 +41,7 @@ jobs:
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: ${{ steps.branch-name.outputs.current_branch }}
-          body: Good
+          body: https://companyname.atlassian.net/browse/${{ steps.branch-name.outputs.current_branch }}
           draft: false
           prerelease: true
 
