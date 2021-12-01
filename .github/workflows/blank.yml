@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: https://companyname.atlassian.net/browse/${{ steps.tag_version.outputs.new_tag }}
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: ${{ steps.branch-name.outputs.current_branch }}
           draft: false
           prerelease: true
