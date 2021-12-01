@@ -25,15 +25,17 @@ jobs:
     steps:
     - name: Extract branch name
       shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
       id: extract_branch
+
     - name: Create release
       id: create_release
       uses: actions/create-release@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH_NAME: ${{ steps.extract_branch.outputs.branch }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: ${{ steps.extract_branch.outputs.branch }}
+        release_name: $BRANCH_NAME
         draft: false
         prerelease: true
